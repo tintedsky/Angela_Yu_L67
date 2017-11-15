@@ -4,18 +4,31 @@ import UIKit
 
 var str = "Hello, playground"
 
-func getBodyMassIndex(weight:Double, height:Double) -> Double{
+func getBodyMassIndex(weight:Double, height:Double) -> String{
     let bodyMassIndex = weight / pow(height, 2)
-    
+
+    let shortenedBMI = String(format: "%.2f", bodyMassIndex)
+
+    var msg:String!
+
     if bodyMassIndex > 25{
-        print("You are overweight buddy!")
+        msg = "You are overweight buddy!"
     }else if bodyMassIndex >= 18.5 {
-        print("Congrats! You are of normal weight!")
+        msg = "Congrats! You are of normal weight!"
     }else{
-        print("You need to eat more everyday because you are underweight!")
+        msg = "You need to eat more everyday because you are underweight!"
     }
     
-    return bodyMassIndex
+    return "Your body Mass Index(BMI) is \(shortenedBMI) \(msg)"
 }
 
-getBodyMassIndex(weight: 66, height: 1.63)
+func bmiCalcImperialUnits(weightInPounds:Double, heightInFeet:Double, remainderInches:Double){
+    let weightInKg = weightInPounds * 0.45359237
+    let totalInches = heightInFeet * 12 + remainderInches
+    let heightInMeters = totalInches * 0.0254
+
+    print(getBodyMassIndex(weight: weightInKg, height: heightInMeters))
+}
+
+print(getBodyMassIndex(weight: 72, height: 1.63))
+bmiCalcImperialUnits(weightInPounds: 140, heightInFeet:5, remainderInches: 11)
